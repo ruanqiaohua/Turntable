@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEd-vt-IAA">
+                                <rect key="frame" x="348" y="796" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aU3-mZ-frQ"/>
+                                    <constraint firstAttribute="width" constant="50" id="efG-sf-Obo"/>
+                                </constraints>
+                                <state key="normal" image="game"/>
+                                <connections>
+                                    <action selector="gameBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lVq-tV-HQ4"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BB7-H5-ccH">
+                                <rect key="frame" x="388" y="796" width="10" height="10"/>
+                                <color key="backgroundColor" red="1" green="0.058823529409999999" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="H7G-DO-KdJ"/>
+                                    <constraint firstAttribute="width" constant="10" id="fIB-Mr-ckB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUn-qQ-xxd">
+                                <rect key="frame" x="348" y="738" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="CjR-KC-WN9"/>
+                                    <constraint firstAttribute="height" constant="50" id="lJK-JZ-iT7"/>
+                                </constraints>
+                                <state key="normal" title="🌟"/>
+                                <connections>
+                                    <action selector="luckyStarBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dry-Pv-YGu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fEd-vt-IAA" firstAttribute="top" secondItem="VUn-qQ-xxd" secondAttribute="bottom" constant="8" id="GFB-tk-mSl"/>
+                            <constraint firstItem="fEd-vt-IAA" firstAttribute="top" secondItem="BB7-H5-ccH" secondAttribute="top" id="KQM-61-IBz"/>
+                            <constraint firstItem="fEd-vt-IAA" firstAttribute="trailing" secondItem="BB7-H5-ccH" secondAttribute="trailing" id="N6g-GQ-pUV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fEd-vt-IAA" secondAttribute="trailing" constant="16" id="Ub0-GA-ipz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fEd-vt-IAA" secondAttribute="bottom" constant="16" id="b1L-wZ-93t"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VUn-qQ-xxd" secondAttribute="trailing" constant="16" id="kSF-n2-EGS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="gameBadgeView" destination="BB7-H5-ccH" id="X4s-OK-jTF"/>
+                        <outlet property="gameBtn" destination="fEd-vt-IAA" id="ttn-h8-xiE"/>
+                        <outlet property="luckyStarBtn" destination="VUn-qQ-xxd" id="bHG-Fh-JCa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="game" width="200" height="200"/>
+    </resources>
+</document>

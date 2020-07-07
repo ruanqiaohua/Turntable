@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameFuctionViewController">
+            <connections>
+                <outlet property="stackView" destination="o7z-uG-IsM" id="wxu-O9-dfd"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPd-eG-xs9">
+                    <rect key="frame" x="0.0" y="802" width="414" height="94"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pve-iq-Y9j">
+                    <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="o7z-uG-IsM">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="BBE-TB-C8S"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="o7z-uG-IsM" firstAttribute="leading" secondItem="Pve-iq-Y9j" secondAttribute="leading" id="Ntp-PK-Wu2"/>
+                        <constraint firstItem="o7z-uG-IsM" firstAttribute="top" secondItem="Pve-iq-Y9j" secondAttribute="top" id="ddd-2L-8I1"/>
+                        <constraint firstAttribute="trailing" secondItem="o7z-uG-IsM" secondAttribute="trailing" priority="750" id="dtG-2c-VqT"/>
+                        <constraint firstAttribute="bottom" secondItem="o7z-uG-IsM" secondAttribute="bottom" id="fbq-wn-bQj"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgl-v6-tyI">
+                    <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                    <connections>
+                        <action selector="backgroundBtnClick:" destination="-1" eventType="touchUpInside" id="grt-3Z-JXG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Pve-iq-Y9j" secondAttribute="bottom" id="6iO-2Q-GR2"/>
+                <constraint firstAttribute="trailing" secondItem="Pve-iq-Y9j" secondAttribute="trailing" id="EuP-YA-bcu"/>
+                <constraint firstItem="fgl-v6-tyI" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="FTM-fS-xvI"/>
+                <constraint firstItem="fgl-v6-tyI" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="GSh-n8-cCt"/>
+                <constraint firstItem="SPd-eG-xs9" firstAttribute="top" secondItem="Pve-iq-Y9j" secondAttribute="top" id="H06-DR-Jqw"/>
+                <constraint firstItem="Pve-iq-Y9j" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="H8x-XW-2HJ"/>
+                <constraint firstItem="SPd-eG-xs9" firstAttribute="top" secondItem="fgl-v6-tyI" secondAttribute="bottom" id="Jbr-Jp-jvf"/>
+                <constraint firstItem="SPd-eG-xs9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Nr8-Cc-0Lj"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="fgl-v6-tyI" secondAttribute="trailing" id="Y2a-Dk-wNB"/>
+                <constraint firstAttribute="trailing" secondItem="SPd-eG-xs9" secondAttribute="trailing" id="o4b-MV-qpj"/>
+                <constraint firstAttribute="bottom" secondItem="SPd-eG-xs9" secondAttribute="bottom" id="qhG-KM-FxW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
+        </view>
+    </objects>
+</document>
