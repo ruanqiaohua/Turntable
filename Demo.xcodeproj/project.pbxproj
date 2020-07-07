@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F99F937B62EF3E4FE5BADDE /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247F634D123DE76974F127A4 /* Pods_Demo.framework */; };
+		F1320BE424B46C2600185AE3 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F1320BE224B46C2600185AE3 /* UIViewController+HUD.m */; };
+		F1320BE724B47A4200185AE3 /* MenaPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */; };
 		F157B17224B2D3C400E2863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F157B17124B2D3C400E2863D /* AppDelegate.m */; };
 		F157B17524B2D3C400E2863D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F157B17424B2D3C400E2863D /* SceneDelegate.m */; };
 		F157B17824B2D3C400E2863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F157B17724B2D3C400E2863D /* ViewController.m */; };
@@ -27,6 +29,10 @@
 		247F634D123DE76974F127A4 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C289B79587207A57262BB5 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		D8BA590BF07777EB3E2CCA6B /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		F1320BE224B46C2600185AE3 /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
+		F1320BE324B46C2600185AE3 /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
+		F1320BE524B47A4200185AE3 /* MenaPopMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenaPopMenuView.h; sourceTree = "<group>"; };
+		F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenaPopMenuView.m; sourceTree = "<group>"; };
 		F157B16D24B2D3C400E2863D /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F157B17024B2D3C400E2863D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F157B17124B2D3C400E2863D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -79,6 +85,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F1320BE124B46C1100185AE3 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				F1320BE324B46C2600185AE3 /* UIViewController+HUD.h */,
+				F1320BE224B46C2600185AE3 /* UIViewController+HUD.m */,
+				F1320BE524B47A4200185AE3 /* MenaPopMenuView.h */,
+				F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		F157B16424B2D3C400E2863D = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +117,7 @@
 		F157B16F24B2D3C400E2863D /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F1320BE124B46C1100185AE3 /* Tool */,
 				F157B18924B2D52300E2863D /* Game */,
 				F157B17024B2D3C400E2863D /* AppDelegate.h */,
 				F157B17124B2D3C400E2863D /* AppDelegate.m */,
@@ -267,9 +285,11 @@
 			files = (
 				F157B19424B2F9C500E2863D /* LuckyStarReadyViewController.m in Sources */,
 				F157B19C24B3053800E2863D /* LuckyStarViewController.m in Sources */,
+				F1320BE424B46C2600185AE3 /* UIViewController+HUD.m in Sources */,
 				F157B17824B2D3C400E2863D /* ViewController.m in Sources */,
 				F157B18E24B2D57300E2863D /* GameFuctionViewController.m in Sources */,
 				F157B17224B2D3C400E2863D /* AppDelegate.m in Sources */,
+				F1320BE724B47A4200185AE3 /* MenaPopMenuView.m in Sources */,
 				F157B18324B2D3C600E2863D /* main.m in Sources */,
 				F157B17524B2D3C400E2863D /* SceneDelegate.m in Sources */,
 			);

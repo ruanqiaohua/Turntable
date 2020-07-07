@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isHost;
 @property (nonatomic, assign) BOOL isMini;
+@property (nonatomic, assign) NSUInteger joinMinCount;
+@property (nonatomic, strong) NSArray *users;
 @property (nonatomic, weak) id<LuckyStarDelegate> delegate;
 
 - (void)reloadData;

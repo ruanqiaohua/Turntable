@@ -10,6 +10,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LuckyStarViewController">
             <connections>
                 <outlet property="closeBtn" destination="2GS-Vi-un5" id="aUJ-g6-gHH"/>
+                <outlet property="joinBtn" destination="CeY-K3-bcN" id="Lkd-oX-rdC"/>
+                <outlet property="starBtn" destination="NDt-Qw-6ns" id="whM-6W-EZg"/>
                 <outlet property="view" destination="zje-bp-KI5" id="vno-G0-r3M"/>
             </connections>
         </placeholder>
@@ -47,6 +49,9 @@
                                 <constraint firstAttribute="width" constant="40" id="hyI-Ya-yJl"/>
                             </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="firstTipBtnClick:" destination="-1" eventType="touchUpInside" id="kws-dP-gB2"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb8-qo-soC">
                             <rect key="frame" x="8" y="58" width="264" height="264"/>
@@ -57,10 +62,16 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeY-K3-bcN">
                                             <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
                                             <state key="normal" title="加入"/>
+                                            <connections>
+                                                <action selector="joinBtnClick:" destination="-1" eventType="touchUpInside" id="5Da-SP-gRc"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDt-Qw-6ns">
                                             <rect key="frame" x="0.0" y="30" width="31" height="30"/>
                                             <state key="normal" title="开始"/>
+                                            <connections>
+                                                <action selector="startBtnClick:" destination="-1" eventType="touchUpInside" id="xPm-FJ-gax"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>

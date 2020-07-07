@@ -3,6 +3,7 @@
 
 target 'Demo' do
   pod 'Masonry'
+  pod 'MBProgressHUD'
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 

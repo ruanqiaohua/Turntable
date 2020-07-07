@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LuckyStarReadyViewController">
             <connections>
+                <outlet property="moneyBtn" destination="Se8-FB-f0v" id="j5A-70-FF5"/>
+                <outlet property="userBtn" destination="8Dl-Zt-ONd" id="dnU-R0-WXq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-E5-lHE">
-                    <rect key="frame" x="67" y="298" width="280" height="310"/>
+                    <rect key="frame" x="67" y="293" width="280" height="310"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGe-Fh-h3X">
                             <rect key="frame" x="240" y="0.0" width="40" height="40"/>
@@ -52,15 +53,21 @@
                                 <constraint firstAttribute="height" constant="20" id="kcz-Vt-9kf"/>
                             </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="firstTipBtnClick:" destination="-1" eventType="touchUpInside" id="mmR-mB-wB2"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dl-Zt-ONd">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dl-Zt-ONd">
                             <rect key="frame" x="16" y="83" width="246" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="du9-r1-P6b"/>
                             </constraints>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="4">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="userBtnClick:" destination="-1" eventType="touchUpInside" id="tcM-Me-1Bk"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参与钻石数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xau-uU-Nf6">
                             <rect key="frame" x="16" y="127" width="71.5" height="17"/>
@@ -75,15 +82,21 @@
                                 <constraint firstAttribute="width" constant="20" id="gDC-be-jON"/>
                             </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="secondTipBtnClick:" destination="-1" eventType="touchUpInside" id="kOh-Xx-Zht"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Se8-FB-f0v">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Se8-FB-f0v">
                             <rect key="frame" x="16" y="152" width="248" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="V0S-fS-I83"/>
                             </constraints>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="50">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="moneyBtnClick:" destination="-1" eventType="touchUpInside" id="2Hq-ao-Ax1"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIL-Og-UKr">
                             <rect key="frame" x="101.5" y="194" width="77" height="34"/>
@@ -140,10 +153,9 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Tjw-E5-lHE" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="Voq-Di-Sfx"/>
-                <constraint firstItem="Tjw-E5-lHE" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="cku-o3-VcL"/>
+                <constraint firstItem="Tjw-E5-lHE" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Voq-Di-Sfx"/>
+                <constraint firstItem="Tjw-E5-lHE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cku-o3-VcL"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
     </objects>
