@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LuckyStarViewController">
             <connections>
+                <outlet property="centerView" destination="cb8-qo-soC" id="D2e-uc-a5a"/>
                 <outlet property="closeBtn" destination="2GS-Vi-un5" id="aUJ-g6-gHH"/>
                 <outlet property="joinBtn" destination="CeY-K3-bcN" id="Lkd-oX-rdC"/>
                 <outlet property="starBtn" destination="NDt-Qw-6ns" id="whM-6W-EZg"/>

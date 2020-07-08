@@ -10,6 +10,8 @@
 		2F99F937B62EF3E4FE5BADDE /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247F634D123DE76974F127A4 /* Pods_Demo.framework */; };
 		F1320BE424B46C2600185AE3 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F1320BE224B46C2600185AE3 /* UIViewController+HUD.m */; };
 		F1320BE724B47A4200185AE3 /* MenaPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */; };
+		F1320BEA24B5A62800185AE3 /* TurntableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1320BE924B5A62800185AE3 /* TurntableView.m */; };
+		F1320BEE24B5B70500185AE3 /* MenaAppUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F1320BED24B5B70500185AE3 /* MenaAppUserInfo.m */; };
 		F157B17224B2D3C400E2863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F157B17124B2D3C400E2863D /* AppDelegate.m */; };
 		F157B17524B2D3C400E2863D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F157B17424B2D3C400E2863D /* SceneDelegate.m */; };
 		F157B17824B2D3C400E2863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F157B17724B2D3C400E2863D /* ViewController.m */; };
@@ -33,6 +35,10 @@
 		F1320BE324B46C2600185AE3 /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
 		F1320BE524B47A4200185AE3 /* MenaPopMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenaPopMenuView.h; sourceTree = "<group>"; };
 		F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenaPopMenuView.m; sourceTree = "<group>"; };
+		F1320BE824B5A62800185AE3 /* TurntableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TurntableView.h; sourceTree = "<group>"; };
+		F1320BE924B5A62800185AE3 /* TurntableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TurntableView.m; sourceTree = "<group>"; };
+		F1320BEC24B5B70500185AE3 /* MenaAppUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenaAppUserInfo.h; sourceTree = "<group>"; };
+		F1320BED24B5B70500185AE3 /* MenaAppUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenaAppUserInfo.m; sourceTree = "<group>"; };
 		F157B16D24B2D3C400E2863D /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F157B17024B2D3C400E2863D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F157B17124B2D3C400E2863D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,8 +98,19 @@
 				F1320BE224B46C2600185AE3 /* UIViewController+HUD.m */,
 				F1320BE524B47A4200185AE3 /* MenaPopMenuView.h */,
 				F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */,
+				F1320BE824B5A62800185AE3 /* TurntableView.h */,
+				F1320BE924B5A62800185AE3 /* TurntableView.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		F1320BEB24B5B6F500185AE3 /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				F1320BEC24B5B70500185AE3 /* MenaAppUserInfo.h */,
+				F1320BED24B5B70500185AE3 /* MenaAppUserInfo.m */,
+			);
+			path = AppModel;
 			sourceTree = "<group>";
 		};
 		F157B16424B2D3C400E2863D = {
@@ -117,6 +134,7 @@
 		F157B16F24B2D3C400E2863D /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F1320BEB24B5B6F500185AE3 /* AppModel */,
 				F1320BE124B46C1100185AE3 /* Tool */,
 				F157B18924B2D52300E2863D /* Game */,
 				F157B17024B2D3C400E2863D /* AppDelegate.h */,
@@ -287,7 +305,9 @@
 				F157B19C24B3053800E2863D /* LuckyStarViewController.m in Sources */,
 				F1320BE424B46C2600185AE3 /* UIViewController+HUD.m in Sources */,
 				F157B17824B2D3C400E2863D /* ViewController.m in Sources */,
+				F1320BEA24B5A62800185AE3 /* TurntableView.m in Sources */,
 				F157B18E24B2D57300E2863D /* GameFuctionViewController.m in Sources */,
+				F1320BEE24B5B70500185AE3 /* MenaAppUserInfo.m in Sources */,
 				F157B17224B2D3C400E2863D /* AppDelegate.m in Sources */,
 				F1320BE724B47A4200185AE3 /* MenaPopMenuView.m in Sources */,
 				F157B18324B2D3C600E2863D /* main.m in Sources */,

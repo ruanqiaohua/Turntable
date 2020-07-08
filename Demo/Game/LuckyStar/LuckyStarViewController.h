@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenaAppUserInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,9 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isHost;
 @property (nonatomic, assign) BOOL isMini;
 @property (nonatomic, assign) NSUInteger joinMinCount;
-@property (nonatomic, strong) NSArray *users;
+@property (nonatomic, assign) NSUInteger joinMaxCount;
+@property (nonatomic, strong) NSMutableArray<MenaAppUserInfo *> *users;
 @property (nonatomic, weak) id<LuckyStarDelegate> delegate;
 
+- (void)insertUser:(MenaAppUserInfo *)user;
 - (void)reloadData;
 
 @end

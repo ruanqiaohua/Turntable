@@ -34,7 +34,7 @@
 }
 
 - (BOOL)isHost {
-    return YES;
+    return NO;
 }
 
 /// 获取功能列表
