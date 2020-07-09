@@ -53,10 +53,12 @@ static CGFloat winAnimationTime = 2.5;
         _closeBtn.hidden = NO;
         _joinBtn.hidden = YES;
         _starBtn.hidden = NO;
+        _closeBtn.hidden = NO;
     } else {
         _closeBtn.hidden = YES;
         _joinBtn.hidden = NO;
         _starBtn.hidden = YES;
+        _closeBtn.hidden = YES;
     }
     _goOnBtn.hidden = YES;
 
@@ -258,6 +260,7 @@ static CGFloat winAnimationTime = 2.5;
 - (void)start {
     
     _starBtn.hidden = YES;
+    _closeBtn.hidden = YES;
     _goOnBtn.hidden = NO;
     __weak typeof(self) weakSelf = self;
     // TODO 请求接口 告诉后台开始游戏
