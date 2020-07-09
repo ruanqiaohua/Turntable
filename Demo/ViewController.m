@@ -98,24 +98,24 @@
 
 - (void)gameFuction:(GameFuctionViewController *)gameFuction itemDidClick:(UIButton *)sender {
     
+    if (_luckyStar.isMini) {
+        [self showLuckyStar];
+        return;
+    }
+    
     gameFuction.view.hidden = YES;
     LuckyStarReadyViewController *vc = [[LuckyStarReadyViewController alloc] init];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self showDetailViewController:vc sender:nil];
     
     __weak typeof(self) weakSelf = self;
-    [vc setStartBtnDidClick:^(LuckyStarReadyViewController * vc, UIButton * startBtn) {
+    [vc setStartBtnDidClick:^(LuckyStarReadyViewController * vc, NSUInteger userCount, NSUInteger moneyCount) {
         [vc dismissViewControllerAnimated:NO completion:nil];
-        [weakSelf showLuckyStarn];
-    }];
-}
-
-#pragma mark - super lucky Star
-
-- (void)showLuckyStarn {
-    
-    if (!_luckyStar) {
-        [self luckyStar];
+        weakSelf.luckyStar.joinMaxCount = userCount;
+        weakSelf.luckyStar.needMoney = moneyCount;
+        [weakSelf showLuckyStar];
+        
+        // test data
         MenaAppUserInfo *user = [MenaAppUserInfo new];
         user.nickname = @"1";
         MenaAppUserInfo *user1 = [MenaAppUserInfo new];
@@ -124,8 +124,18 @@
         user2.nickname = @"3";
         MenaAppUserInfo *user3 = [MenaAppUserInfo new];
         user3.nickname = @"4";
-        [_luckyStar setUsers:[@[user, user1, user2, user3] mutableCopy]];
-        [_luckyStar reloadData];
+        [weakSelf.luckyStar setUsers:[@[user, user1, user2, user3] mutableCopy]];
+        [weakSelf.luckyStar reloadData];
+
+    }];
+}
+
+#pragma mark - super lucky Star
+
+- (void)showLuckyStar {
+    
+    if (!_luckyStar) {
+        [self luckyStar];
     }
     _luckyStar.isMini = NO;
     _luckyStar.view.hidden = NO;
@@ -140,17 +150,21 @@
     _luckyStarBtn.hidden = NO;
 }
 
-- (void)luckyStar:(LuckyStarViewController *)luckyStar closeDidClick:(UIButton *)sender {
+- (void)didClose:(LuckyStarViewController *)luckyStar {
     
     _luckyStarBtn.hidden = YES;
-    [_luckyStar.view removeFromSuperview];
-    [_luckyStar removeFromParentViewController];
-    _luckyStar = nil;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.luckyStar.view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.luckyStar.view removeFromSuperview];
+        [self.luckyStar removeFromParentViewController];
+        self.luckyStar = nil;
+    }];
 }
 
 - (IBAction)luckyStarBtnClick:(UIButton *)sender {
     
-    [self showLuckyStarn];
+    [self showLuckyStar];
 }
 
 @end

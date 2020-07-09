@@ -14,8 +14,8 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *userBtn;
 @property (nonatomic, weak) IBOutlet UIButton *moneyBtn;
-@property (nonatomic, assign) NSUInteger defaultUserCount;
-@property (nonatomic, assign) NSUInteger defaultMoneyCount;
+@property (nonatomic, assign) NSUInteger userCount;
+@property (nonatomic, assign) NSUInteger moneyCount;
 @property (nonatomic, strong) NSArray *userCounts;
 @property (nonatomic, strong) NSArray *moneyCounts;
 
@@ -28,8 +28,8 @@
     self = [super init];
     if (self) {
         
-        _defaultUserCount = 3;
-        _defaultMoneyCount = 100;
+        _userCount = 3;
+        _moneyCount = 100;
     }
     return self;
 }
@@ -37,8 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [_userBtn setTitle:[NSString stringWithFormat:@"%@", @(_defaultUserCount)] forState:UIControlStateNormal];
-    [_moneyBtn setTitle:[NSString stringWithFormat:@"%@", @(_defaultMoneyCount)] forState:UIControlStateNormal];
+    [_userBtn setTitle:[NSString stringWithFormat:@"%@", @(_userCount)] forState:UIControlStateNormal];
+    [_moneyBtn setTitle:[NSString stringWithFormat:@"%@", @(_moneyCount)] forState:UIControlStateNormal];
 }
 
 - (NSArray *)userCounts {
@@ -69,7 +69,8 @@
     
     __weak typeof(self) weakSelf = self;
     [view setItemDidClick:^(NSInteger index) {
-        [weakSelf.userBtn setTitle:[NSString stringWithFormat:@"%@", weakSelf.userCounts[index]] forState:UIControlStateNormal];
+        weakSelf.userCount = [weakSelf.userCounts[index] integerValue];
+        [weakSelf.userBtn setTitle:[NSString stringWithFormat:@"%@", @(weakSelf.userCount)] forState:UIControlStateNormal];
     }];
 }
 
@@ -87,7 +88,8 @@
     
     __weak typeof(self) weakSelf = self;
     [view setItemDidClick:^(NSInteger index) {
-        [weakSelf.moneyBtn setTitle:[NSString stringWithFormat:@"%@", weakSelf.moneyCounts[index]] forState:UIControlStateNormal];
+        weakSelf.moneyCount = [weakSelf.moneyCounts[index] integerValue];
+        [weakSelf.moneyBtn setTitle:[NSString stringWithFormat:@"%@", @(weakSelf.moneyCount)] forState:UIControlStateNormal];
     }];
 }
 
@@ -99,7 +101,7 @@
 - (IBAction)startBtnClick:(UIButton *)sender {
     
     if (_startBtnDidClick) {
-        _startBtnDidClick(self, sender);
+        _startBtnDidClick(self, _userCount, _moneyCount);
     }
 }
 

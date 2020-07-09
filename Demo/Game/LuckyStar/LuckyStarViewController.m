@@ -29,6 +29,9 @@
 
 @end
 
+static CGFloat animationTime = 1.5;
+static CGFloat winAnimationTime = 3;
+
 @implementation LuckyStarViewController
 
 - (instancetype)init
@@ -59,6 +62,12 @@
     _isFinish = NO;
 }
 
+- (void)setIsFinish:(BOOL)isFinish {
+    _isFinish = isFinish;
+    _goOnBtn.hidden = YES;
+    [self performSelector:@selector(close) withObject:nil afterDelay:winAnimationTime];
+}
+
 /// 用户加入
 - (void)insertUser:(MenaAppUserInfo *)user {
     
@@ -78,18 +87,20 @@
     NSString *title = [NSString stringWithFormat:@"%@ Out", _users[index].nickname];
     
     __weak typeof(self) weakSelf = self;
-    [self userAnimatetionWithTitle:title finish:^{
+    [self userAnimation:title time:animationTime finish:^{
         
         // 胜利者
         if (weakSelf.users.count == 1) {
             
             NSString *title = [NSString stringWithFormat:@"%@ Win ~", weakSelf.users[0].nickname];
-            [self userAnimatetionWithTitle:title finish:nil];
+            [weakSelf userAnimation:title time:winAnimationTime finish:nil];
+            // 指针指向用户
+            weakSelf.isFinish = weakSelf.users.count == 1;
+            [weakSelf updateTurntable];
         }
     }];
     
     [_users removeObjectAtIndex:index];
-    _isFinish = _users.count == 1;
     [self updateTurntable];
 }
 
@@ -114,7 +125,11 @@
     for (MenaAppUserInfo *user in _users) {
         [urls addObject:user.nickname];
     }
-    [_turntable setUsersWithUrls:urls];
+    if (urls.count == 1 && _isFinish) {
+        [_turntable setWinUserWithURL:urls.firstObject];
+    } else {
+        [_turntable setUsersWithUrls:urls];
+    }
 }
 
 - (void)reloadData {
@@ -143,11 +158,17 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     __weak typeof(self) weakSelf = self;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(luckyStar:closeDidClick:)]) {
-            [weakSelf.delegate luckyStar:weakSelf closeDidClick:sender];
-        }
+        // TODO 请求接口 告诉后台强制关闭游戏
+        [weakSelf close];
     }]];
     [self showDetailViewController:alert sender:nil];
+}
+
+- (void)close {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didClose:)]) {
+        [_delegate didClose:self];
+    }
 }
 
 - (IBAction)joinBtnClick:(id)sender {
@@ -157,7 +178,8 @@
         return;
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"本次参与将消耗xxx钻石。游戏获胜者将获得所有参与者总花费的90%钻石奖励。" preferredStyle:UIAlertControllerStyleAlert];
+    NSString *message = [NSString stringWithFormat:@"本次参与将消耗%@钻石。游戏获胜者将获得所有参与者总花费的90%%钻石奖励。", @(_needMoney)];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     __weak typeof(self) weakSelf = self;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -195,7 +217,7 @@
     
     // TODO 请求接口 告诉后台继续
     
-    // 动画
+    // 转盘动画
     __weak typeof(self) weakSelf = self;
     [_turntable startAnimation:[self getOutUserIndex] finish:^(NSInteger targetIndex) {
         [weakSelf deleteUserWithIndex:targetIndex];
@@ -205,6 +227,8 @@
 /// 开始转盘
 - (void)start {
     
+    _starBtn.hidden = YES;
+    _goOnBtn.hidden = NO;
     __weak typeof(self) weakSelf = self;
     // TODO 请求接口 告诉后台开始游戏
     // 倒计时动画
@@ -224,9 +248,10 @@
 #pragma mark 动画
 
 /// 用户Out动画
-- (void)userAnimatetionWithTitle:(NSString *)title finish:(void (^)(void))finish {
+- (void)userAnimation:(NSString *)title time:(CGFloat)time finish:(void (^)(void))finish {
     
     UILabel *label = [[UILabel alloc] init];
+    label.userInteractionEnabled = YES;
     label.frame = _contentView.bounds;
     label.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
     label.textColor = [UIColor whiteColor];
@@ -242,7 +267,7 @@
         
     } completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:0.2 delay:1.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.2 delay:time-0.4 options:UIViewAnimationOptionCurveEaseIn animations:^{
             // 渐隐
             label.alpha = 0.1;
             
@@ -264,6 +289,7 @@
     UIView *view = [_contentView viewWithTag:1000];
     if (view == nil) {
         view = [[UIView alloc] init];
+        view.userInteractionEnabled = YES;
         view.frame = _contentView.bounds;
         view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
         view.tag = 1000;

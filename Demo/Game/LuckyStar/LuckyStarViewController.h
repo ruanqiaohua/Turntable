@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)luckyStar:(LuckyStarViewController *)luckyStar minimizeDidClick:(UIButton *)sender;
 
-- (void)luckyStar:(LuckyStarViewController *)luckyStar closeDidClick:(UIButton *)sender;
+- (void)didClose:(LuckyStarViewController *)luckyStar;
 
 @end
 
@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isFinish;
 @property (nonatomic, assign) NSUInteger joinMinCount;
 @property (nonatomic, assign) NSUInteger joinMaxCount;
+@property (nonatomic, assign) NSUInteger needMoney;
 @property (nonatomic, strong) NSMutableArray<MenaAppUserInfo *> *users;
 @property (nonatomic, weak) id<LuckyStarDelegate> delegate;
 

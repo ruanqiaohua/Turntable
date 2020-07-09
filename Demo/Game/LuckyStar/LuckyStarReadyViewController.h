@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LuckyStarReadyViewController : UIViewController
 
-@property (nonatomic, copy) void(^startBtnDidClick)(LuckyStarReadyViewController *, UIButton *);
+@property (nonatomic, copy) void(^startBtnDidClick)(LuckyStarReadyViewController *, NSUInteger userCount, NSUInteger moneyCount);
 
 @end
 
