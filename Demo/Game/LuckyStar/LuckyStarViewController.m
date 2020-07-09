@@ -55,6 +55,7 @@
 //    }
     
     _isMini = NO;
+    _isFinish = NO;
 }
 
 /// 用户加入
@@ -85,7 +86,9 @@
             [self userAnimatetionWithTitle:title finish:nil];
         }
     }];
+    
     [_users removeObjectAtIndex:index];
+    _isFinish = _users.count == 1;
     [self updateTurntable];
 }
 
@@ -143,7 +146,11 @@
     for (MenaAppUserInfo *user in _users) {
         [urls addObject:user.nickname];
     }
-    [_turntable setUsersWithUrls:urls];
+    if (urls.count == 1 && _isFinish) {
+        [_turntable setWinUserWithURL:urls.firstObject];
+    } else {
+        [_turntable setUsersWithUrls:urls];
+    }
 }
 
 - (void)reloadData {

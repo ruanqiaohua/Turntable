@@ -19,6 +19,7 @@ typedef void(^TurntableFinishBlock)(NSInteger targetIndex);
 
 - (void)setBackgroundWithColors:(NSArray *)colors;
 - (void)setUsersWithUrls:(NSArray *)urls;
+- (void)setWinUserWithURL:(NSString *)url;
 - (void)startAnimation:(NSInteger)index finish:(TurntableFinishBlock _Nullable)finish;
 
 @end

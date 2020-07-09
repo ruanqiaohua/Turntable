@@ -59,18 +59,34 @@
     NSUInteger count = urls.count;
     for (int i=0; i<count; i++) {
 
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,M_PI * CGRectGetHeight(self.frame)/count,CGRectGetHeight(self.frame)*3/5)];
-        label.layer.anchorPoint = CGPointMake(0.5, 1.0);
+        UILabel *label = [self userView];
+        label.frame = CGRectMake(0, 0, M_PI * CGRectGetHeight(self.frame)/count,CGRectGetHeight(self.frame)*3/5);
         label.center = CGPointMake(CGRectGetHeight(self.frame)/2, CGRectGetHeight(self.frame)/2);
         label.text = [NSString stringWithFormat:@"%@", urls[i]];
-        label.textColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont boldSystemFontOfSize:14];
         CGFloat rowAngle = M_PI*2/count;
         CGFloat angle = rowAngle *i + rowAngle/2;
         label.transform = CGAffineTransformMakeRotation(angle);
         [self addSubview:label];
     }
+}
+
+- (UILabel *)userView {
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont boldSystemFontOfSize:14];
+    return label;
+}
+
+- (void)setWinUserWithURL:(NSString *)url {
+    
+    UILabel *label = [self userView];
+    label.frame = CGRectMake(0, 0, M_PI * CGRectGetHeight(self.frame)/2,CGRectGetHeight(self.frame)*3/5);
+    label.center = CGPointMake(CGRectGetHeight(self.frame)/2, CGRectGetHeight(self.frame)/2);
+    label.text = url;
+    [self addSubview:label];
 }
 
 - (void)startAnimation:(NSInteger)index finish:(TurntableFinishBlock _Nullable)finish {

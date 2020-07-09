@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isHost;
 @property (nonatomic, assign) BOOL isMini;
+@property (nonatomic, assign) BOOL isFinish;
 @property (nonatomic, assign) NSUInteger joinMinCount;
 @property (nonatomic, assign) NSUInteger joinMaxCount;
 @property (nonatomic, strong) NSMutableArray<MenaAppUserInfo *> *users;
