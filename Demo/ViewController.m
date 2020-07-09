@@ -117,10 +117,14 @@
     if (!_luckyStar) {
         [self luckyStar];
         MenaAppUserInfo *user = [MenaAppUserInfo new];
-        user.nickname = @"123";
+        user.nickname = @"1";
         MenaAppUserInfo *user1 = [MenaAppUserInfo new];
-        user1.nickname = @"456";
-        [_luckyStar setUsers:[@[user, user1] mutableCopy]];
+        user1.nickname = @"2";
+        MenaAppUserInfo *user2 = [MenaAppUserInfo new];
+        user2.nickname = @"3";
+        MenaAppUserInfo *user3 = [MenaAppUserInfo new];
+        user3.nickname = @"4";
+        [_luckyStar setUsers:[@[user, user1, user2, user3] mutableCopy]];
         [_luckyStar reloadData];
     }
     _luckyStar.isMini = NO;

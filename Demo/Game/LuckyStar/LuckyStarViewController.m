@@ -114,11 +114,7 @@
     for (MenaAppUserInfo *user in _users) {
         [urls addObject:user.nickname];
     }
-    if (urls.count == 1 && _isFinish) {
-        [_turntable setWinUserWithURL:urls.firstObject];
-    } else {
-        [_turntable setUsersWithUrls:urls];
-    }
+    [_turntable setUsersWithUrls:urls];
 }
 
 - (void)reloadData {

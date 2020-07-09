@@ -102,9 +102,10 @@
     [self.layer removeAllAnimations];
     
     //设置转圈的圈数
+    NSUInteger count = _colors.count;
     NSInteger circleNum = 6;
-    CGFloat rowAngle = M_PI*2/_colors.count;
-    CGFloat angle = rowAngle *index + rowAngle/2;
+    CGFloat rowAngle = M_PI*2/count;
+    CGFloat angle = rowAngle * (count-1-index) + rowAngle/2;
     CGFloat perAngle = M_PI/180.0;
     
     CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
