@@ -25,6 +25,8 @@
 
 @property (nonatomic, weak) IBOutlet UIView *centerView;
 
+@property (nonatomic, weak) IBOutlet UILabel *diamonLabel;
+
 @property (nonatomic, strong) TurntableView *turntable;
 
 @end
@@ -75,7 +77,7 @@ static CGFloat winAnimationTime = 2.5;
         _users = [NSMutableArray array];
     }
     [_users addObject:user];
-    [self updateTurntable];
+    [self reloadData];
 }
 
 - (void)deleteUserWithIndex:(NSInteger)index {
@@ -160,9 +162,11 @@ static CGFloat winAnimationTime = 2.5;
 
 - (void)reloadData {
     
-    if (_users.count > 0) {
-        [self updateTurntable];
+    if (_users.count == 0) {
+        return;
     }
+    [self updateTurntable];
+    _diamonLabel.text = [NSString stringWithFormat:@"%@", @(_needMoney * _users.count * 0.9)];
 }
 
 - (IBAction)firstTipBtnClick:(UIButton *)sender {

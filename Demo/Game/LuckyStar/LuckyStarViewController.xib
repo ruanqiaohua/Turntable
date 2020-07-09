@@ -12,6 +12,7 @@
                 <outlet property="centerView" destination="cb8-qo-soC" id="D2e-uc-a5a"/>
                 <outlet property="closeBtn" destination="2GS-Vi-un5" id="aUJ-g6-gHH"/>
                 <outlet property="contentView" destination="xcv-9u-Q1R" id="YNA-Sd-aJZ"/>
+                <outlet property="diamonLabel" destination="BG6-bD-k1F" id="kq2-Z6-A6R"/>
                 <outlet property="goOnBtn" destination="LVu-aj-DZw" id="Fjs-jH-sWC"/>
                 <outlet property="joinBtn" destination="CeY-K3-bcN" id="Lkd-oX-rdC"/>
                 <outlet property="starBtn" destination="NDt-Qw-6ns" id="whM-6W-EZg"/>
