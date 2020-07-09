@@ -19,6 +19,10 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *starBtn;
 
+@property (nonatomic, weak) IBOutlet UIButton *goOnBtn;
+
+@property (nonatomic, weak) IBOutlet UIView *contentView;
+
 @property (nonatomic, weak) IBOutlet UIView *centerView;
 
 @property (nonatomic, strong) TurntableView *turntable;
@@ -51,18 +55,6 @@
 //    }
     
     _isMini = NO;
-    
-    [self createTurntable];
-}
-
-/// 创建转盘
-- (void)createTurntable {
-    
-    _turntable = [[TurntableView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
-    [_centerView insertSubview:_turntable atIndex:0];
-    [_turntable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
 }
 
 /// 用户加入
@@ -72,6 +64,70 @@
         _users = [NSMutableArray array];
     }
     [_users addObject:user];
+    [self updateTurntable];
+}
+
+- (void)deleteUserWithIndex:(NSInteger)index {
+    
+    if (_users.count <= index || _users.count == 1) {
+        return;
+    }
+    
+    NSString *title = [NSString stringWithFormat:@"%@ Out", _users[index].nickname];
+    
+    __weak typeof(self) weakSelf = self;
+    [self userAnimatetionWithTitle:title finish:^{
+        
+        // 胜利者
+        if (weakSelf.users.count == 1) {
+            
+            NSString *title = [NSString stringWithFormat:@"%@ Win ~", weakSelf.users[0].nickname];
+            [self userAnimatetionWithTitle:title finish:nil];
+        }
+    }];
+    [_users removeObjectAtIndex:index];
+    [self updateTurntable];
+}
+
+/// 用户Out动画
+- (void)userAnimatetionWithTitle:(NSString *)title finish:(void (^)(void))finish {
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = _contentView.bounds;
+    label.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:25];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = title;
+    label.alpha = 0.1;
+    [_contentView addSubview:label];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        // 渐显
+        label.alpha = 1.0;
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.2 delay:1.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            // 渐隐
+            label.alpha = 0.1;
+            
+        } completion:^(BOOL finished) {
+            
+            [label removeFromSuperview];
+            if (finish) {
+                finish();
+            }
+        }];
+    }];
+}
+
+/// 更新转盘
+- (void)updateTurntable {
+    
+    [_turntable removeFromSuperview];
+    _turntable = [[TurntableView alloc] initWithFrame:_centerView.bounds];
+    [_centerView insertSubview:_turntable atIndex:0];
 
     NSMutableArray *colors = [NSMutableArray array];
     for (int i=0; i<_users.count; i++) {
@@ -97,7 +153,7 @@
 
 - (IBAction)firstTipBtnClick:(UIButton *)sender {
     
-    // TODO H5
+    // TODO 跳转游戏介绍H5
 }
 
 - (IBAction)minimizeBtnClick:(UIButton *)sender {
@@ -122,6 +178,11 @@
 }
 
 - (IBAction)joinBtnClick:(id)sender {
+    
+    if (_users.count == _joinMaxCount) {
+        [self HUDToastWithString:@"本局游戏人数已达上限"];
+        return;
+    }
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"本次参与将消耗xxx钻石。游戏获胜者将获得所有参与者总花费的90%钻石奖励。" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -148,13 +209,40 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         __weak typeof(self) weakSelf = self;
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [weakSelf.turntable startAnimationWithTargetIndex:arc4random()%weakSelf.users.count];
+            [weakSelf start];
         }]];
         [self showDetailViewController:alert sender:nil];
         return;
     }
-    [_turntable startAnimationWithTargetIndex:arc4random()%_users.count];
+    [self start];
+}
+
+/// 继续转盘
+- (IBAction)goOnBtnClick:(id)sender {
     
+    // TODO 请求接口 告诉后台继续
+    
+    // 动画
+    __weak typeof(self) weakSelf = self;
+    [_turntable startAnimation:[self getOutUserIndex] finish:^(NSInteger targetIndex) {
+        [weakSelf deleteUserWithIndex:targetIndex];
+    }];
+}
+
+/// 开始转盘
+- (void)start {
+    
+    // TODO 请求接口 告诉后台开始游戏
+    
+    // 动画
+    __weak typeof(self) weakSelf = self;
+    [_turntable startAnimation:[self getOutUserIndex] finish:^(NSInteger targetIndex) {
+        [weakSelf deleteUserWithIndex:targetIndex];
+    }];
+}
+
+- (NSInteger)getOutUserIndex {
+    return arc4random()%_users.count;
 }
 
 @end

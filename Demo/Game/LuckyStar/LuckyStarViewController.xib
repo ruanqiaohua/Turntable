@@ -11,6 +11,8 @@
             <connections>
                 <outlet property="centerView" destination="cb8-qo-soC" id="D2e-uc-a5a"/>
                 <outlet property="closeBtn" destination="2GS-Vi-un5" id="aUJ-g6-gHH"/>
+                <outlet property="contentView" destination="xcv-9u-Q1R" id="YNA-Sd-aJZ"/>
+                <outlet property="goOnBtn" destination="LVu-aj-DZw" id="Fjs-jH-sWC"/>
                 <outlet property="joinBtn" destination="CeY-K3-bcN" id="Lkd-oX-rdC"/>
                 <outlet property="starBtn" destination="NDt-Qw-6ns" id="whM-6W-EZg"/>
                 <outlet property="view" destination="zje-bp-KI5" id="vno-G0-r3M"/>
@@ -58,7 +60,7 @@
                             <rect key="frame" x="8" y="58" width="264" height="264"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LsA-Hg-NMZ">
-                                    <rect key="frame" x="116.5" y="102" width="31" height="60"/>
+                                    <rect key="frame" x="116.5" y="87" width="31" height="90"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeY-K3-bcN">
                                             <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
@@ -72,6 +74,13 @@
                                             <state key="normal" title="开始"/>
                                             <connections>
                                                 <action selector="startBtnClick:" destination="-1" eventType="touchUpInside" id="xPm-FJ-gax"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVu-aj-DZw">
+                                            <rect key="frame" x="0.0" y="60" width="31" height="30"/>
+                                            <state key="normal" title="继续"/>
+                                            <connections>
+                                                <action selector="goOnBtnClick:" destination="-1" eventType="touchUpInside" id="8bZ-Kb-hKl"/>
                                             </connections>
                                         </button>
                                     </subviews>

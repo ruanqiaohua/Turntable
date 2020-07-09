@@ -10,15 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^TurntableFinishBlock)(NSInteger targetIndex);
+
 @interface TurntableView : UIView<CAAnimationDelegate>
 
 @property (nonatomic, assign) BOOL isAnimation;
-@property (nonatomic, assign) CGFloat circleAngle;
 @property (nonatomic, strong) NSArray *colors;
 
 - (void)setBackgroundWithColors:(NSArray *)colors;
 - (void)setUsersWithUrls:(NSArray *)urls;
-- (void)startAnimationWithTargetIndex:(NSInteger)index;
+- (void)startAnimation:(NSInteger)index finish:(TurntableFinishBlock _Nullable)finish;
 
 @end
 
