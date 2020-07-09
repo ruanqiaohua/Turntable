@@ -21,6 +21,8 @@ typedef void(^TurntableFinishBlock)(NSInteger targetIndex);
 - (void)setUsersWithUrls:(NSArray *)urls;
 - (void)setWinUserWithURL:(NSString *)url;
 - (void)startAnimation:(NSInteger)index finish:(TurntableFinishBlock _Nullable)finish;
+- (void)startAnimation:(NSInteger)index waitStop:(BOOL)stop finish:(TurntableFinishBlock _Nullable)finish;
+- (void)stop;
 
 @end
 

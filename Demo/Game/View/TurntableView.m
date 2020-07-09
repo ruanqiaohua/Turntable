@@ -89,7 +89,12 @@
     [self addSubview:label];
 }
 
-- (void)startAnimation:(NSInteger)index finish:(TurntableFinishBlock _Nullable)finish {
+- (void)startAnimation:(NSInteger)index finish:(TurntableFinishBlock)finish {
+    
+    [self startAnimation:index waitStop:NO finish:finish];
+}
+
+- (void)startAnimation:(NSInteger)index waitStop:(BOOL)stop finish:(TurntableFinishBlock _Nullable)finish {
         
     //判断是否正在转
     if (_isAnimation) {
@@ -110,15 +115,50 @@
     
     CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
     rotationAnimation.toValue = [NSNumber numberWithFloat:angle + 360 * perAngle * circleNum];
+    rotationAnimation.cumulative = YES;
+    
+    //由快变慢
+    if (stop == NO) {
+        rotationAnimation.duration = 3.0f;
+        rotationAnimation.delegate = self;
+        rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        rotationAnimation.fillMode=kCAFillModeForwards;
+        rotationAnimation.removedOnCompletion = NO;
+    } else {
+        rotationAnimation.duration = 2.0f;
+        rotationAnimation.repeatCount = CGFLOAT_MAX;
+    }
+    
+    [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
+- (void)start {
+    
+    //判断是否正在转
+    if (_isAnimation) {
+        return;
+    }
+    _isAnimation = YES;
+
+    [self.layer removeAllAnimations];
+    
+    //设置转圈的圈数
+    NSInteger circleNum = 6;
+    CGFloat perAngle = M_PI/180.0;
+
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:360 * perAngle * circleNum];
     rotationAnimation.duration = 3.0f;
     rotationAnimation.cumulative = YES;
     rotationAnimation.delegate = self;
-    
-    //由快变慢
-    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    rotationAnimation.fillMode=kCAFillModeForwards;
-    rotationAnimation.removedOnCompletion = NO;
+    rotationAnimation.repeatCount = CGFLOAT_MAX;
     [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
+- (void)stop {
+    
+    _isAnimation = NO;
+    [self startAnimation:_targetIndex finish:_finishBlock];
 }
 
 #pragma mark 动画结束

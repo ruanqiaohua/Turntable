@@ -61,6 +61,8 @@ static CGFloat winAnimationTime = 2.5;
         _closeBtn.hidden = YES;
     }
     _goOnBtn.hidden = YES;
+    UILongPressGestureRecognizer *press = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(goOnBtnLongPress:)];
+    [_goOnBtn addGestureRecognizer:press];
 
     _isMini = NO;
     _isFinish = NO;
@@ -186,11 +188,15 @@ static CGFloat winAnimationTime = 2.5;
 
 - (IBAction)closeBtnClick:(UIButton *)sender {
     
+    if (_users.count == 0) {
+        [self close];
+        return;
+    }
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"关闭当前游戏，钻石将原路返还给参与者。是否确定关闭？" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     __weak typeof(self) weakSelf = self;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // TODO 请求接口 告诉后台强制关闭游戏
         [weakSelf close];
     }]];
     [self showDetailViewController:alert sender:nil];
@@ -198,10 +204,13 @@ static CGFloat winAnimationTime = 2.5;
 
 - (void)close {
     
+    // TODO 请求接口 告诉后台强制关闭游戏
     if (_delegate && [_delegate respondsToSelector:@selector(didClose:)]) {
         [_delegate didClose:self];
     }
 }
+
+#pragma mark 加入
 
 - (IBAction)joinBtnClick:(id)sender {
     
@@ -215,14 +224,20 @@ static CGFloat winAnimationTime = 2.5;
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     __weak typeof(self) weakSelf = self;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // TODO 判断用户的账户余额
+        // TODO 请求加入接口
         MenaAppUserInfo *user = [MenaAppUserInfo new];
         user.nickname = @"test";
         user.avatarurl = @"https://sdfdsf";
+        user.color = [UIColor yellowColor];
         [weakSelf insertUser:user];
     }]];
     [self showDetailViewController:alert sender:nil];
 }
 
+#pragma mark 主播操作
+
+/// 开始转盘
 - (IBAction)startBtnClick:(id)sender {
     
     if (_users.count < _joinMinCount) {
@@ -256,12 +271,35 @@ static CGFloat winAnimationTime = 2.5;
     }];
 }
 
+- (void)goOnBtnLongPress:(UILongPressGestureRecognizer *)sender {
+    
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            NSLog(@"长按开始");
+            __weak typeof(self) weakSelf = self;
+            [_turntable startAnimation:[self getOutUserIndex] waitStop:YES finish:^(NSInteger targetIndex) {
+                [weakSelf deleteUserWithIndex:targetIndex];
+            }];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            NSLog(@"长按结束");
+            [_turntable stop];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 /// 开始转盘
 - (void)start {
     
     _starBtn.hidden = YES;
     _closeBtn.hidden = YES;
-    _goOnBtn.hidden = NO;
+
     __weak typeof(self) weakSelf = self;
     // TODO 请求接口 告诉后台开始游戏
     // 倒计时动画
@@ -270,6 +308,7 @@ static CGFloat winAnimationTime = 2.5;
         // 转盘动画
         [weakSelf.turntable startAnimation:[weakSelf getOutUserIndex] finish:^(NSInteger targetIndex) {
             [weakSelf deleteUserWithIndex:targetIndex];
+            weakSelf.goOnBtn.hidden = NO;
         }];
     }];
 }
