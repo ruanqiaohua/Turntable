@@ -91,15 +91,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F11E4B7624B7002800655555 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F1320BE524B47A4200185AE3 /* MenaPopMenuView.h */,
+				F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */,
+				F1320BE824B5A62800185AE3 /* TurntableView.h */,
+				F1320BE924B5A62800185AE3 /* TurntableView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F1320BE124B46C1100185AE3 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
 				F1320BE324B46C2600185AE3 /* UIViewController+HUD.h */,
 				F1320BE224B46C2600185AE3 /* UIViewController+HUD.m */,
-				F1320BE524B47A4200185AE3 /* MenaPopMenuView.h */,
-				F1320BE624B47A4200185AE3 /* MenaPopMenuView.m */,
-				F1320BE824B5A62800185AE3 /* TurntableView.h */,
-				F1320BE924B5A62800185AE3 /* TurntableView.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -155,6 +162,7 @@
 		F157B18924B2D52300E2863D /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				F11E4B7624B7002800655555 /* View */,
 				F157B18A24B2D52D00E2863D /* GameFuction */,
 				F157B19024B2F99700E2863D /* LuckyStar */,
 			);

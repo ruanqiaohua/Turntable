@@ -30,7 +30,7 @@
 @end
 
 static CGFloat animationTime = 1.5;
-static CGFloat winAnimationTime = 3;
+static CGFloat winAnimationTime = 2.5;
 
 @implementation LuckyStarViewController
 
@@ -84,24 +84,46 @@ static CGFloat winAnimationTime = 3;
         return;
     }
     
-    NSString *title = [NSString stringWithFormat:@"%@ Out", _users[index].nickname];
-    
     __weak typeof(self) weakSelf = self;
-    [self userAnimation:title time:animationTime finish:^{
+    // 延迟0.4秒显示谁被淘汰
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        // 胜利者
-        if (weakSelf.users.count == 1) {
+        NSString *title = [NSString stringWithFormat:@"%@ Out", weakSelf.users[index].nickname];
+        
+        [weakSelf userAnimation:title time:animationTime finish:^{
             
-            NSString *title = [NSString stringWithFormat:@"%@ Win ~", weakSelf.users[0].nickname];
-            [weakSelf userAnimation:title time:winAnimationTime finish:nil];
-            // 指针指向用户
-            weakSelf.isFinish = weakSelf.users.count == 1;
-            [weakSelf updateTurntable];
-        }
-    }];
+            // 胜利者
+            if (weakSelf.users.count == 1) {
+                
+                NSString *title = [NSString stringWithFormat:@"%@ Win ~", weakSelf.users[0].nickname];
+                [weakSelf userAnimation:title time:winAnimationTime finish:nil];
+                // 指针指向用户
+                weakSelf.isFinish = weakSelf.users.count == 1;
+                [weakSelf updateTurntable];
+            }
+        }];
+        
+        [weakSelf.users removeObjectAtIndex:index];
+        [weakSelf updateTurntable];
+    });
+}
+
+- (UIColor *)getColor:(NSInteger)index {
     
-    [_users removeObjectAtIndex:index];
-    [self updateTurntable];
+    if (!_colorSpaces) {
+        _colorSpaces = [NSMutableArray array];
+    }
+    UIColor *color;
+    if (_colorSpaces.count > index) {
+        color = _colorSpaces[index];
+    } else {
+        CGFloat red = arc4random()%100*0.01;
+        CGFloat green = arc4random()%100*0.01;
+        CGFloat blue = arc4random()%100*0.01;
+        color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+        [_colorSpaces addObject:color];
+    }
+    return color;
 }
 
 /// 更新转盘
@@ -112,20 +134,24 @@ static CGFloat winAnimationTime = 3;
     [_centerView insertSubview:_turntable atIndex:0];
 
     NSMutableArray *colors = [NSMutableArray array];
-    for (int i=0; i<_users.count; i++) {
-        CGFloat red = arc4random()%100*0.01;
-        CGFloat green = arc4random()%100*0.01;
-        CGFloat blue = arc4random()%100*0.01;
-        UIColor *color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
-        [colors addObject:color];
-    }
-    [_turntable setBackgroundWithColors:colors];
-    
     NSMutableArray *urls = [NSMutableArray array];
-    for (MenaAppUserInfo *user in _users) {
+
+    for (int i=0; i<_users.count; i++) {
+        MenaAppUserInfo *user = _users[i];
+        UIColor *color;
+        if (user.color) {
+            color = user.color;
+        } else {
+            color = [self getColor:i];
+            user.color = color;
+        }
+        [colors addObject:color];
         [urls addObject:user.nickname];
     }
-    if (urls.count == 1 && _isFinish) {
+    
+    [_turntable setBackgroundWithColors:colors];
+
+    if (_isFinish && urls.count == 1) {
         [_turntable setWinUserWithURL:urls.firstObject];
     } else {
         [_turntable setUsersWithUrls:urls];
