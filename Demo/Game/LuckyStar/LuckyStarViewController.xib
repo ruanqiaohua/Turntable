@@ -59,6 +59,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb8-qo-soC">
                             <rect key="frame" x="8" y="58" width="264" height="264"/>
                             <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhizhen" translatesAutoresizingMaskIntoConstraints="NO" id="GIM-te-kRa">
+                                    <rect key="frame" x="100" y="83" width="64" height="64"/>
+                                </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LsA-Hg-NMZ">
                                     <rect key="frame" x="116.5" y="87" width="31" height="90"/>
                                     <subviews>
@@ -88,6 +91,8 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
+                                <constraint firstItem="GIM-te-kRa" firstAttribute="centerX" secondItem="cb8-qo-soC" secondAttribute="centerX" id="1xh-dF-YZi"/>
+                                <constraint firstItem="GIM-te-kRa" firstAttribute="centerY" secondItem="cb8-qo-soC" secondAttribute="centerY" constant="-17" id="34u-aR-KJI"/>
                                 <constraint firstItem="LsA-Hg-NMZ" firstAttribute="centerY" secondItem="cb8-qo-soC" secondAttribute="centerY" id="F6R-jd-cCv"/>
                                 <constraint firstAttribute="width" secondItem="cb8-qo-soC" secondAttribute="height" multiplier="1:1" id="bT8-uI-bkg"/>
                                 <constraint firstItem="LsA-Hg-NMZ" firstAttribute="centerX" secondItem="cb8-qo-soC" secondAttribute="centerX" id="nQP-pn-cv9"/>
@@ -149,4 +154,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="zhizhen" width="64" height="64"/>
+    </resources>
 </document>

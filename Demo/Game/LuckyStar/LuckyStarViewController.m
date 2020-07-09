@@ -44,16 +44,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    if (_isHost) {
-//        _closeBtn.hidden = NO;
-//        _joinBtn.hidden = YES;
-//        _starBtn.hidden = NO;
-//    } else {
-//        _closeBtn.hidden = YES;
-//        _joinBtn.hidden = NO;
-//        _starBtn.hidden = YES;
-//    }
-    
+    if (_isHost) {
+        _closeBtn.hidden = NO;
+        _joinBtn.hidden = YES;
+        _starBtn.hidden = NO;
+    } else {
+        _closeBtn.hidden = YES;
+        _joinBtn.hidden = NO;
+        _starBtn.hidden = YES;
+    }
+    _goOnBtn.hidden = YES;
+
     _isMini = NO;
     _isFinish = NO;
 }
@@ -92,39 +93,6 @@
     [self updateTurntable];
 }
 
-/// 用户Out动画
-- (void)userAnimatetionWithTitle:(NSString *)title finish:(void (^)(void))finish {
-    
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = _contentView.bounds;
-    label.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:25];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = title;
-    label.alpha = 0.1;
-    [_contentView addSubview:label];
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        // 渐显
-        label.alpha = 1.0;
-        
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:0.2 delay:1.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            // 渐隐
-            label.alpha = 0.1;
-            
-        } completion:^(BOOL finished) {
-            
-            [label removeFromSuperview];
-            if (finish) {
-                finish();
-            }
-        }];
-    }];
-}
-
 /// 更新转盘
 - (void)updateTurntable {
     
@@ -154,8 +122,10 @@
 }
 
 - (void)reloadData {
-
-    _isMini = NO;
+    
+    if (_users.count > 0) {
+        [self updateTurntable];
+    }
 }
 
 - (IBAction)firstTipBtnClick:(UIButton *)sender {
@@ -239,17 +209,100 @@
 /// 开始转盘
 - (void)start {
     
-    // TODO 请求接口 告诉后台开始游戏
-    
-    // 动画
     __weak typeof(self) weakSelf = self;
-    [_turntable startAnimation:[self getOutUserIndex] finish:^(NSInteger targetIndex) {
-        [weakSelf deleteUserWithIndex:targetIndex];
+    // TODO 请求接口 告诉后台开始游戏
+    // 倒计时动画
+    [self countDownAnimation:3 finish:^{
+        
+        // 转盘动画
+        [weakSelf.turntable startAnimation:[weakSelf getOutUserIndex] finish:^(NSInteger targetIndex) {
+            [weakSelf deleteUserWithIndex:targetIndex];
+        }];
     }];
 }
 
 - (NSInteger)getOutUserIndex {
     return arc4random()%_users.count;
+}
+
+#pragma mark 动画
+
+/// 用户Out动画
+- (void)userAnimatetionWithTitle:(NSString *)title finish:(void (^)(void))finish {
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = _contentView.bounds;
+    label.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:25];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = title;
+    label.alpha = 0.1;
+    [_contentView addSubview:label];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        // 渐显
+        label.alpha = 1.0;
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.2 delay:1.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            // 渐隐
+            label.alpha = 0.1;
+            
+        } completion:^(BOOL finished) {
+            
+            [label removeFromSuperview];
+            if (finish) {
+                finish();
+            }
+        }];
+    }];
+}
+
+/// 321倒计时动画
+- (void)countDownAnimation:(NSUInteger)time finish:(void (^)(void))finish {
+    
+    __block NSUInteger countDownTime = time;
+    
+    UIView *view = [_contentView viewWithTag:1000];
+    if (view == nil) {
+        view = [[UIView alloc] init];
+        view.frame = _contentView.bounds;
+        view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+        view.tag = 1000;
+        [_contentView addSubview:view];
+    }
+    
+    UILabel *label = [view viewWithTag:1001];
+
+    if (label == nil) {
+        
+        label = [[UILabel alloc] init];
+        label.frame = view.bounds;
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont boldSystemFontOfSize:100];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = 1001;
+        [view addSubview:label];
+    }
+    label.text = [NSString stringWithFormat:@"%@", @(time)];
+
+    [UIView animateWithDuration:1 animations:^{
+        // 缩小
+        label.transform = CGAffineTransformScale(label.transform, 0.4, 0.4);
+
+    } completion:^(BOOL finished) {
+        
+        label.transform = view.transform;
+        countDownTime -= 1;
+        if (finish && countDownTime == 0) {
+            [view removeFromSuperview];
+            finish();
+        } else {
+            [self countDownAnimation:countDownTime finish:finish];
+        }
+    }];
 }
 
 @end

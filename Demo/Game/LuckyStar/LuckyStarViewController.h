@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)insertUser:(MenaAppUserInfo *)user;
 - (void)reloadData;
+/// 开始转盘
+- (void)start;
 
 @end
 

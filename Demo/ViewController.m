@@ -34,7 +34,7 @@
 }
 
 - (BOOL)isHost {
-    return NO;
+    return YES;
 }
 
 /// 获取功能列表
@@ -116,8 +116,14 @@
     
     if (!_luckyStar) {
         [self luckyStar];
+        MenaAppUserInfo *user = [MenaAppUserInfo new];
+        user.nickname = @"123";
+        MenaAppUserInfo *user1 = [MenaAppUserInfo new];
+        user1.nickname = @"456";
+        [_luckyStar setUsers:[@[user, user1] mutableCopy]];
+        [_luckyStar reloadData];
     }
-    [_luckyStar reloadData];
+    _luckyStar.isMini = NO;
     _luckyStar.view.hidden = NO;
     [self.view bringSubviewToFront:_luckyStar.view];
 }
